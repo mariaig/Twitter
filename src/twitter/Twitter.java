@@ -11,7 +11,7 @@ public class Twitter {
     ArrayList<User> users;
 
     Twitter() {
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<>();
         loadUsers();
     }
 
@@ -27,26 +27,29 @@ public class Twitter {
         if (input.contains("->")) {
             String[] parts = input.split("->");
             //username=parts[0] ||| message=parts[1]
+            parts[0] = removeExtraWhiteSpaces(parts[0]);
+            parts[1] = removeExtraWhiteSpaces(parts[1]);
+
             User user = getUserByName(parts[0]);
-            user.setUsername(parts[0]);
             user.newMessage(parts[1], time);
         } else if (input.contains(" follows ")) {
             String[] parts = input.split(" follows ");
             //username=parts[0] ||| anotherUsername=parts[1]
+            parts[0] = removeExtraWhiteSpaces(parts[0]);
+            parts[1] = removeExtraWhiteSpaces(parts[1]);
+
             User user = getUserByName(parts[0]);
-            user.setUsername(parts[0]);
-            User followUser=getUserByName(parts[1]);
+            User followUser = getUserByName(parts[1]);
             user.addUserToFollow(followUser);
-        } else if(input.endsWith(" wall")){
+        } else if (input.endsWith(" wall")) {
             String[] parts = input.split(" wall");
-            User user=getUserByName(parts[0]);
-            user.setUsername(parts[0]);
+            parts[0] = removeExtraWhiteSpaces(parts[0]);
+            User user = getUserByName(parts[0]);
             user.showWall(time);
-        }
-        else {
+        } else {
             //just username->reading
+            input=removeExtraWhiteSpaces(input);
             User user = getUserByName(input);
-            user.setUsername(input);
             user.showUserPosts(time);
         }
 
@@ -61,4 +64,11 @@ public class Twitter {
         throw new CannotFindUser();
     }
 
+    private String removeExtraWhiteSpaces(String str) {
+        str = str.trim();
+        while (str.contains("  ")) {
+            str = str.replace("  "," ");
+        }
+        return str;
+    }
 }

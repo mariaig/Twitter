@@ -1,0 +1,13 @@
+Alice        ->g           m!
+Bob->hey!
+Mary->mmmmmmmmmmmmmmmeh!
+               Charlie   ->          sun is up!
+Alice  -> sda
+Alice        -> bla
+Bob follows Mary
+Alice follows Mary
+Alice follows Charlie
+Charlie follows Bob
+Charlie follows Alice
+Charlie wall
+

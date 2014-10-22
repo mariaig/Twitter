@@ -8,9 +8,6 @@ package twitter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,8 +24,8 @@ public class User {
     private String timeStr;
 
     User() {
-        messages = new ArrayList<Message>();
-        follow=new ArrayList<User>();
+        messages = new ArrayList<>();
+        follow=new ArrayList<>();
         this.timeLong=0;
         this.timeStr="";
     }
@@ -39,7 +36,6 @@ public class User {
     }
 
     public void newMessage(String message, long postedTime) {
-
         this.messages.add(new Message(postedTime, message,this.username));
         
         Collections.sort(this.messages, new Comparator<Message>() {
@@ -60,7 +56,7 @@ public class User {
     }
     
     public void showWall(long currentTime){
-        ArrayList<Message> allPosts=new ArrayList<Message>();
+        ArrayList<Message> allPosts=new ArrayList<>();
         allPosts.addAll(messages);
         for(User fU:follow){
             allPosts.addAll(fU.getMessages());
