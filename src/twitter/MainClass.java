@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,9 +56,15 @@ public class MainClass {
         fm.readFile(file);
         ArrayList<Long> times=fm.getTimes();
         ArrayList<String> lines=fm.getLines();
+        Twitter tw=new Twitter();
         
         for(int i=0;i<times.size();i++){
-            System.out.println(times.get(i)+" | "+lines.get(i));
+            try {
+                System.out.println(lines.get(i));
+                tw.tweet(lines.get(i), times.get(i));
+            } catch (CannotFindUser ex) {
+               
+            }
         }
        
     }
