@@ -1,13 +1,16 @@
-Alice        ->g           m!
-Bob->hey!
-Mary->mmmmmmmmmmmmmmmeh!
-               Charlie   ->          sun is up!
-Alice  -> sda
-Alice        -> bla
-Bob follows Mary
-Alice follows Mary
-Alice follows Charlie
-Charlie follows Bob
-Charlie follows Alice
-Charlie wall
-
+0| Alice        ->g           m!
+30| Bob->hey!
+31| Mary->mmmmmmmmmmmmmmmeh!
+45|               Charlie   ->          sun is up!
+47|Alice  -> sda
+50|Alice        -> bla
+52|Bob follows Mary
+55|Alice follows Mary
+67|Alice follows Charlie
+100|Charlie follows Bob
+101|Charlie follows Alice
+102|Charlie wall
+107|   Alice wall
+230| Bob follows Alice
+270| Bob
+271| Bob wall

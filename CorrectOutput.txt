@@ -1,0 +1,32 @@
+ Alice        ->g           m!
+ Bob->hey!
+ Mary->mmmmmmmmmmmmmmmeh!
+               Charlie   ->          sun is up!
+Alice  -> sda
+Alice        -> bla
+Bob follows Mary
+Alice follows Mary
+Alice follows Charlie
+Charlie follows Bob
+Charlie follows Alice
+Charlie wall
+Alice - bla (52 seconds ago)
+Alice - sda (55 seconds ago)
+Charlie - sun is up! (57 seconds ago)
+Bob - hey! (1 minute ago)
+Alice - g m! (1 minute ago)
+   Alice wall
+Alice - bla (57 seconds ago)
+Alice - sda (1 minute ago)
+Charlie - sun is up! (1 minute ago)
+Mary - mmmmmmmmmmmmmmmeh! (1 minute ago)
+Alice - g m! (1 minute ago)
+ Bob follows Alice
+ Bob
+hey! (4 minutes ago)
+ Bob wall
+Alice - bla (3 minutes ago)
+Alice - sda (3 minutes ago)
+Mary - mmmmmmmmmmmmmmmeh! (4 minutes ago)
+Bob - hey! (4 minutes ago)
+Alice - g m! (4 minutes ago)
