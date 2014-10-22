@@ -27,28 +27,28 @@ public class Twitter {
         if (input.contains("->")) {
             String[] parts = input.split("->");
             //username=parts[0] ||| message=parts[1]
-            parts[0] = removeExtraWhiteSpaces(parts[0]);
-            parts[1] = removeExtraWhiteSpaces(parts[1]);
+            parts[0] = StringsManager.removeExtraWhiteSpaces(parts[0]);
+            parts[1] = StringsManager.removeExtraWhiteSpaces(parts[1]);
 
             User user = getUserByName(parts[0]);
             user.newMessage(parts[1], time);
         } else if (input.contains(" follows ")) {
             String[] parts = input.split(" follows ");
             //username=parts[0] ||| anotherUsername=parts[1]
-            parts[0] = removeExtraWhiteSpaces(parts[0]);
-            parts[1] = removeExtraWhiteSpaces(parts[1]);
+            parts[0] = StringsManager.removeExtraWhiteSpaces(parts[0]);
+            parts[1] = StringsManager.removeExtraWhiteSpaces(parts[1]);
 
             User user = getUserByName(parts[0]);
             User followUser = getUserByName(parts[1]);
             user.addUserToFollow(followUser);
         } else if (input.endsWith(" wall")) {
             String[] parts = input.split(" wall");
-            parts[0] = removeExtraWhiteSpaces(parts[0]);
+            parts[0] = StringsManager.removeExtraWhiteSpaces(parts[0]);
             User user = getUserByName(parts[0]);
             user.showWall(time);
         } else {
             //just username->reading
-            input=removeExtraWhiteSpaces(input);
+            input=StringsManager.removeExtraWhiteSpaces(input);
             User user = getUserByName(input);
             user.showUserPosts(time);
         }
@@ -64,11 +64,5 @@ public class Twitter {
         throw new CannotFindUser();
     }
 
-    private String removeExtraWhiteSpaces(String str) {
-        str = str.trim();
-        while (str.contains("  ")) {
-            str = str.replace("  "," ");
-        }
-        return str;
-    }
+    
 }

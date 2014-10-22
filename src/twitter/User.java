@@ -22,65 +22,78 @@ public class User {
 
     private long timeLong;
     private String timeStr;
+    
 
     User() {
         messages = new ArrayList<>();
-        follow=new ArrayList<>();
-        this.timeLong=0;
-        this.timeStr="";
+        follow = new ArrayList<>();
+        this.timeLong = 0;
+        this.timeStr = "";
     }
 
     User(String username) {
         this();
-        this.username = username;      
+        this.username = username;
     }
 
     public void newMessage(String message, long postedTime) {
-        this.messages.add(new Message(postedTime, message,this.username));
-        
+        this.messages.add(new Message(postedTime, message, this.username));
+
         Collections.sort(this.messages, new Comparator<Message>() {
             @Override
             public int compare(Message o1, Message o2) {
-                return (int)(o2.getTime()-o1.getTime());
+                return (int) (o2.getTime() - o1.getTime());
             }
         });
     }
-    
-    public void showUserPosts(long currentTime) {
 
+    public void showUserPosts(long currentTime) {
+        
         for (Message msg : this.messages) {
             convertTime(currentTime - msg.getTime());
-            System.out.println(msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)");
+            printUserPosts(msg);
         }
 
     }
-    
-    public void showWall(long currentTime){
-        ArrayList<Message> allPosts=new ArrayList<>();
+
+    public void showWall(long currentTime) {
+        ArrayList<Message> allPosts = new ArrayList<>();
         allPosts.addAll(messages);
-        for(User fU:follow){
+        for (User fU : follow) {
             allPosts.addAll(fU.getMessages());
         }
         Collections.sort(allPosts, new Comparator<Message>() {
             @Override
             public int compare(Message o1, Message o2) {
-                return (int)(o2.getTime()-o1.getTime());
+                return (int) (o2.getTime() - o1.getTime());
             }
         });
-        
-        for(Message msg:allPosts){
-            convertTime(currentTime - msg.getTime());
-            System.out.println(msg.getUserName()+" - "+msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)");
-        }
-        
-    }
-    
 
-    
-    public void addUserToFollow(User user){
+        for (Message msg : allPosts) {
+            convertTime(currentTime - msg.getTime());
+            printWall(msg);
+        }
+
+    }
+
+    private void printWall(Message msg) {
+        String output=msg.getUserName() + " - " + msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
+        System.out.println(output);
+        FilesManager fm=FilesManager.getInstance();
+        fm.appendToOutputFile(output);
+    }
+
+    private void printUserPosts(Message msg) {
+        String output=msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
+        System.out.println(output);
+        FilesManager fm=FilesManager.getInstance();
+        fm.appendToOutputFile(output);
+    }
+
+    public void addUserToFollow(User user) {
         this.follow.add(user);
     }
-   
+
     public void convertTime(long postedTime) {
         long time = TimeUnit.SECONDS.toDays(postedTime);
         if (time != Long.MIN_VALUE && time != Long.MAX_VALUE && time > 0) {
@@ -118,7 +131,7 @@ public class User {
             timeStr += "s";
         }
     }
-    
+
     public String getUsername() {
         return this.username;
     }
@@ -134,6 +147,5 @@ public class User {
     public ArrayList<User> getFollows() {
         return follow;
     }
-    
-    
+
 }

@@ -6,11 +6,13 @@
 package twitter;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,51 +22,86 @@ import java.util.logging.Logger;
  */
 public class FilesManager {
 
+    private static FilesManager instance = new FilesManager();
     private ArrayList<Long> times;
     private ArrayList<String> lines;
-    private final int TIMECONSTANT = 30;
+    private final String TIMESEPARATOR = "\\|";
+    private String inputFile;
+    private String outputFile;
 
-    public FilesManager() {
+    private FilesManager() {
         times = new ArrayList<>();
         lines = new ArrayList<>();
+        inputFile = "";
+        outputFile = "";
     }
 
-    public void readFile(String pathToFile) {
-        BufferedReader br;
-        boolean first = true;
-        long time = 0;
-        long startNano = 0, nowSeconds;
+    public static FilesManager getInstance() {
+        return instance;
+    }
 
-        try {
-            br = new BufferedReader(new FileReader(pathToFile));
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (first) {
-                    startNano = System.nanoTime();
-                    times.add(time);
-                    lines.add(line);
-                    first = false;
-                    time = (long) (Math.random() * TIMECONSTANT);
-                    Thread.sleep(time*1000);
+    public void readFile() throws InccorectFileIndentation, IOException {
+        if (inputFile.equals("")) {
+            System.err.println("EMPTY FILENAME");
+            return;
+        }
+        BufferedReader br;
+
+        br = new BufferedReader(new FileReader(inputFile));
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (!line.equals("")) {
+                String[] parts = line.split(TIMESEPARATOR);
+                parts[0] = StringsManager.removeExtraWhiteSpaces(parts[0]);
+                if (!parts[0].equals("") && !parts[1].equals("")) {
+                    times.add(Long.parseLong(parts[0]));
+                    lines.add(parts[1]);
                 } else {
-                    times.add(time);
-                    lines.add(line);
-                    nowSeconds = TimeUnit.SECONDS.convert(System.nanoTime()-startNano, TimeUnit.NANOSECONDS)+TIMECONSTANT;
-                    Random rand = new Random();
-                    time = rand.nextInt((int) (nowSeconds - time) + 1) + time;
-                    Thread.sleep(time*100);
-                    System.out.println();
+                    throw new InccorectFileIndentation();
                 }
             }
-        } catch (IOException io) {
-            //io.printStackTrace();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(FilesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public void appendToFile() {
+    public void appendToOutputFile(String strToAppend) {
+        if (outputFile.equals("")) {
+            System.err.println("EMPTY FILENAME");
+            return;
+        }
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter(outputFile, true));
+            bw.write(strToAppend);
+            bw.newLine();
+            bw.close();
+        } catch (IOException ex) {
+        }
 
+    }
+
+    public void compareOutputWith(String pathToResultsFile) throws FileNotFoundException, IOException {
+        BufferedReader brOut, brResult;
+        System.out.println("----------------------------------------------");
+        
+        File outFile=new File(this.outputFile);
+        File resFile=new File(pathToResultsFile);
+        
+        if(outFile.length()!=resFile.length()){
+            System.err.println("INVALID OUTPUT");
+            return;
+        }
+        brOut = new BufferedReader(new FileReader(this.outputFile));
+        brResult = new BufferedReader(new FileReader(pathToResultsFile));
+
+        String lineOut, lineResult;
+        while ((lineOut = brOut.readLine()) != null && (lineResult = brResult.readLine()) != null) {
+            if (!lineOut.equals(lineResult)) {
+                System.err.println("INVALID OUTPUT");
+                return;
+            }
+        }
+        System.out.println("ALL GOOD HERE!");
     }
 
     public ArrayList<Long> getTimes() {
@@ -81,6 +118,22 @@ public class FilesManager {
 
     public void setLines(ArrayList<String> lines) {
         this.lines = lines;
+    }
+
+    public String getInputFile() {
+        return inputFile;
+    }
+
+    public void setInputFile(String inputFile) {
+        this.inputFile = inputFile;
+    }
+
+    public String getOutputFile() {
+        return outputFile;
+    }
+
+    public void setOutputFile(String outputFile) {
+        this.outputFile = outputFile;
     }
 
 }
