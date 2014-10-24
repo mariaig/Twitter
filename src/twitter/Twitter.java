@@ -71,7 +71,13 @@ public class Twitter {
             User followUser = getUserByName(parts[1]);
             user.removeFollowUser(followUser);
 
-        }else {
+        }else if(input.endsWith(" show messages")){
+            String[] parts=input.split(" show messages");
+            parts[0]=StringsManager.removeExtraWhiteSpaces(parts[0]);
+            User user=getUserByName(parts[0]);
+            user.showMessages(time);
+        }
+        else {
             //just username->reading
             input = StringsManager.removeExtraWhiteSpaces(input);
             User user = getUserByName(input);

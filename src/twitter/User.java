@@ -27,7 +27,7 @@ public class User {
     User() {
         ownPosts = new ArrayList<>();
         follow = new ArrayList<>();
-        messages=new ArrayList<>();
+        messages = new ArrayList<>();
         this.timeLong = 0;
         this.timeStr = "";
     }
@@ -43,15 +43,15 @@ public class User {
 
     public void newReceivedMessage(String message, long postedTime, String fromUser) {
         String msg = fromUser + " says:" + message;
-        this.messages.add(new Message(postedTime, msg, this.username,fromUser));
+        this.messages.add(new Message(postedTime, msg, this.username, fromUser));
     }
 
     public void showUserPosts(long currentTime) {
-        ArrayList<Message> postsAndMessages=new ArrayList<>();
+        ArrayList<Message> postsAndMessages = new ArrayList<>();
         if (!this.messages.isEmpty()) {
             postsAndMessages.addAll(messages);
         }
-        if(!this.ownPosts.isEmpty()){
+        if (!this.ownPosts.isEmpty()) {
             postsAndMessages.addAll(ownPosts);
         }
         if (!postsAndMessages.isEmpty()) {
@@ -82,7 +82,7 @@ public class User {
                 }
             }
         }
-        
+
         if (!allPosts.isEmpty()) {
             Collections.sort(allPosts, new Comparator<Message>() {
                 @Override
@@ -96,6 +96,28 @@ public class User {
             }
         }
 
+    }
+
+    public void showMessages(long currentTime) {
+        if (!this.messages.isEmpty()) {
+            Collections.sort(this.messages, new Comparator<Message>() {
+                @Override
+                public int compare(Message o1, Message o2) {
+                    return (int) (o2.getTime() - o1.getTime());
+                }
+            });
+            for (Message msg : this.messages) {
+                convertTime(currentTime - msg.getTime());
+                printMessages(msg);
+            }
+        }
+    }
+
+    private void printMessages(Message msg) {
+        String output = msg.getMessage() + " " + " (" + this.timeLong + " " + this.timeStr + " ago)";
+        System.out.println(output);
+        FilesManager fm = FilesManager.getInstance();
+        fm.appendToOutputFile(output);
     }
 
     private void printWall(Message msg) {
@@ -119,18 +141,18 @@ public class User {
     public void removeFollowUser(User user) throws UserNotInTheFollowers {
 
         if (!this.follow.isEmpty() && this.followsUser(user.getUsername())) {
-            if(!this.messages.isEmpty()){
+            if (!this.messages.isEmpty()) {
                 //delete all messages form this user
-                int i=0;
-                while(i<this.messages.size()){
-                    String msgFrom=this.messages.get(i).getMsgFromUsername();
-                    if(msgFrom.equals(user.getUsername())){
+                int i = 0;
+                while (i < this.messages.size()) {
+                    String msgFrom = this.messages.get(i).getMsgFromUsername();
+                    if (msgFrom.equals(user.getUsername())) {
                         this.messages.remove(i);
-                    }else{
+                    } else {
                         i++;
                     }
                 }
-                
+
             }
             this.follow.remove(user);
         } else {

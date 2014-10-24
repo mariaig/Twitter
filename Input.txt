@@ -24,3 +24,6 @@
 315|Alice
 316|Alice unfollow Mary
 317|Alice
+319|Mary
+320|Mary show messages
+330|Alice show messages
