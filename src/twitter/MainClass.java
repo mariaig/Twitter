@@ -92,6 +92,8 @@ public class MainClass {
             ex.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (UserNotInTheFollowers ex) {
+            UserNotInTheFollowers.showMessage();
         }
 
     }

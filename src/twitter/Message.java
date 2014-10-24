@@ -9,11 +9,19 @@ public class Message {
     private String userName;
     private long time;
     private String message;
+    private String msgFromUsername;
+
+
     
     Message(long time,String message,String user){
         this.time=time;
         this.message=message;
         this.userName=user;
+    }
+
+    public Message(long time,String message,String userName, String msgFromUser) {
+        this(time,message,userName);
+        this.msgFromUsername = msgFromUser;
     }
 
     public long getTime() {
@@ -41,6 +49,12 @@ public class Message {
     }
     
     
-    
+    public String getMsgFromUsername() {
+        return msgFromUsername;
+    }
+
+    public void setMsgFromUsername(String msgFromUser) {
+        this.msgFromUsername = msgFromUser;
+    }
             
 }

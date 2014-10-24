@@ -30,3 +30,27 @@ Alice - sda (3 minutes ago)
 Mary - mmmmmmmmmmmmmmmeh! (4 minutes ago)
 Bob - hey! (4 minutes ago)
 Alice - g m! (4 minutes ago)
+Bob unfollow Mary
+Bob wall
+Alice - bla (4 minutes ago)
+Alice - sda (4 minutes ago)
+Bob - hey! (4 minutes ago)
+Alice - g m! (4 minutes ago)
+Alice -> Hello Mary! to Mary
+Mary wall
+Mary - mmmmmmmmmmmmmmmeh! (4 minutes ago)
+Mary
+Alice says:Hello Mary! (11 seconds ago)
+mmmmmmmmmmmmmmmeh! (4 minutes ago)
+Mary follows Alice
+Mary -> Hello Alice! to Alice
+Alice
+Mary says:Hello Alice! (1 second ago)
+bla (4 minutes ago)
+sda (4 minutes ago)
+g m! (5 minutes ago)
+Alice unfollow Mary
+Alice
+bla (4 minutes ago)
+sda (4 minutes ago)
+g m! (5 minutes ago)

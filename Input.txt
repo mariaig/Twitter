@@ -14,3 +14,13 @@
 230| Bob follows Alice
 270| Bob
 271| Bob wall
+277|Bob unfollow Mary
+290|Bob wall
+300|Alice -> Hello Mary! to Mary
+310|Mary wall
+311|Mary
+313|Mary follows Alice
+314|Mary -> Hello Alice! to Alice
+315|Alice
+316|Alice unfollow Mary
+317|Alice
