@@ -1,4 +1,3 @@
-
 package twitter;
 
 /**
@@ -6,22 +5,25 @@ package twitter;
  * @author Maria
  */
 public class Message {
+
     private String userName;
     private long time;
     private String message;
     private String msgFromUsername;
 
-
-    
-    Message(long time,String message,String user){
-        this.time=time;
-        this.message=message;
-        this.userName=user;
+    Message(long time, String message, String user) {
+        this.time = time;
+        this.message = message;
+        this.userName = user;
     }
 
-    public Message(long time,String message,String userName, String msgFromUser) {
-        this(time,message,userName);
+    public Message(long time, String message, String userName, String msgFromUser) {
+        this(time, message, userName);
         this.msgFromUsername = msgFromUser;
+    }
+
+    public boolean isPost() {
+        return msgFromUsername == "";
     }
 
     public long getTime() {
@@ -47,14 +49,13 @@ public class Message {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
-    
-    public String getMsgFromUsername() {
+
+    public String gotMsgFromUsername() {
         return msgFromUsername;
     }
 
     public void setMsgFromUsername(String msgFromUser) {
         this.msgFromUsername = msgFromUser;
     }
-            
+
 }

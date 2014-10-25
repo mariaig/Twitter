@@ -113,21 +113,21 @@ public class User {
         }
     }
 
-    private void printMessages(Message msg) {
+    public void printMessages(Message msg) {
         String output = msg.getMessage() + " " + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
         FilesManager fm = FilesManager.getInstance();
         fm.appendToOutputFile(output);
     }
 
-    private void printWall(Message msg) {
+    public void printWall(Message msg) {
         String output = msg.getUserName() + " - " + msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
         FilesManager fm = FilesManager.getInstance();
         fm.appendToOutputFile(output);
     }
 
-    private void printUserPosts(Message msg) {
+    public void printUserPosts(Message msg) {
         String output = msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
         FilesManager fm = FilesManager.getInstance();
@@ -141,25 +141,27 @@ public class User {
     public void removeFollowUser(User user) throws UserNotInTheFollowers {
 
         if (!this.follow.isEmpty() && this.followsUser(user.getUsername())) {
-            if (!this.messages.isEmpty()) {
-                //delete all messages form this user
-                int i = 0;
-                while (i < this.messages.size()) {
-                    String msgFrom = this.messages.get(i).getMsgFromUsername();
-                    if (msgFrom.equals(user.getUsername())) {
-                        this.messages.remove(i);
-                    } else {
-                        i++;
-                    }
-                }
-
-            }
             this.follow.remove(user);
         } else {
             throw new UserNotInTheFollowers();
         }
     }
 
+    public void removeMsgsFrom(String username){
+        if (!this.messages.isEmpty()) {
+                //delete all messages from this username
+                int i = 0;
+                while (i < this.messages.size()) {
+                    String msgFrom = this.messages.get(i).gotMsgFromUsername();
+                    if (!msgFrom.equals(username)) {
+                        i++;
+                    } else {
+                        this.messages.remove(i);
+                    }
+                }
+
+            }
+    }
     public void convertTime(long postedTime) {
         long time = TimeUnit.SECONDS.toDays(postedTime);
         if (time != Long.MIN_VALUE && time != Long.MAX_VALUE && time > 0) {
@@ -229,4 +231,7 @@ public class User {
         return follow;
     }
 
+    public ArrayList<User> getFollow() {
+        return follow;
+    }
 }

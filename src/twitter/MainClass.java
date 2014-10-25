@@ -57,9 +57,9 @@ public class MainClass {
         ArrayList<Long> times = fm.getTimes();
         ArrayList<String> lines = fm.getLines();
         
-        String inputFile = "Input.txt";
+        String inputFile = "Input3.txt";
         String outputFile = "Output.txt";
-        String corOutput="CorrectOutput.txt";
+        String corOutput="CorrectOutput3.txt";
         
         //clear file
         try { 

@@ -1,0 +1,28 @@
+ Alice follows Mary
+ Alice follows Bob
+ Alice -> I'm Alice
+ Mary -> I'm Mary
+ Bob -> I'm Bob
+ Charlie -> I'm Charlie
+ Alice -> Hello Mary! to Mary
+ Alice -> Hello Bob! to Bob
+ Bob follows Mary
+ Bob->Hello Mary! to Mary
+ Alice
+I'm Alice (6 seconds ago)
+ Mary follows Alice
+ Mary -> Hello Alice! to Alice
+ Mary
+Bob says:Hello Mary! (1 second ago)
+Alice says:Hello Mary! (5 seconds ago)
+I'm Mary (8 seconds ago)
+ Alice
+Mary says:Hello Alice! (2 seconds ago)
+I'm Alice (10 seconds ago)
+ Alice unfollow Mary
+ Alice
+I'm Alice (12 seconds ago)
+ Mary
+Bob says:Hello Mary! (5 seconds ago)
+Alice says:Hello Mary! (9 seconds ago)
+I'm Mary (12 seconds ago)

@@ -1,0 +1,15 @@
+0| Alice follows Mary
+1| Alice follows Bob
+2| Bob follows Charlie
+3| Mary follows Bob
+4| Alice -> I'm Alice
+5| Mary -> I'm Mary
+6| Bob -> I'm Bob
+7| Charlie -> I'm Charlie
+8| Bob followers' walls
+9| Charlie follows Alice
+10| Charlie -> Hello Alice! to Alice
+11| Mary follows Alice
+12| Mary->Hello Alice! to Alice
+13| Alice
+14| Bob followers' walls
