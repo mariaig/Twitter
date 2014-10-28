@@ -24,6 +24,8 @@ public class User {
     private long timeLong;
     private String timeStr;
 
+    public static boolean tests = false;
+
     User() {
         ownPosts = new ArrayList<>();
         follow = new ArrayList<>();
@@ -116,22 +118,28 @@ public class User {
     public void printMessages(Message msg) {
         String output = msg.getMessage() + " " + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
-        FilesManager fm = FilesManager.getInstance();
-        fm.appendToOutputFile(output);
+        if (tests) {
+            FilesManager fm = FilesManager.getInstance();
+            fm.appendToOutputFile(output);
+        }
     }
 
     public void printWall(Message msg) {
         String output = msg.getUserName() + " - " + msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
-        FilesManager fm = FilesManager.getInstance();
-        fm.appendToOutputFile(output);
+        if (tests) {
+            FilesManager fm = FilesManager.getInstance();
+            fm.appendToOutputFile(output);
+        }
     }
 
     public void printUserPosts(Message msg) {
         String output = msg.getMessage() + " (" + this.timeLong + " " + this.timeStr + " ago)";
         System.out.println(output);
-        FilesManager fm = FilesManager.getInstance();
-        fm.appendToOutputFile(output);
+        if (tests) {
+            FilesManager fm = FilesManager.getInstance();
+            fm.appendToOutputFile(output);
+        }
     }
 
     public void addUserToFollow(User user) {
@@ -147,21 +155,22 @@ public class User {
         }
     }
 
-    public void removeMsgsFrom(String username){
+    public void removeMsgsFrom(String username) {
         if (!this.messages.isEmpty()) {
-                //delete all messages from this username
-                int i = 0;
-                while (i < this.messages.size()) {
-                    String msgFrom = this.messages.get(i).gotMsgFromUsername();
-                    if (!msgFrom.equals(username)) {
-                        i++;
-                    } else {
-                        this.messages.remove(i);
-                    }
+            //delete all messages from this username
+            int i = 0;
+            while (i < this.messages.size()) {
+                String msgFrom = this.messages.get(i).gotMsgFromUsername();
+                if (!msgFrom.equals(username)) {
+                    i++;
+                } else {
+                    this.messages.remove(i);
                 }
-
             }
+
+        }
     }
+
     public void convertTime(long postedTime) {
         long time = TimeUnit.SECONDS.toDays(postedTime);
         if (time != Long.MIN_VALUE && time != Long.MAX_VALUE && time > 0) {

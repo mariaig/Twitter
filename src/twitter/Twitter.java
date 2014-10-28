@@ -10,8 +10,9 @@ import java.util.Comparator;
  */
 public class Twitter {
 
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
     public static int nrOfUsers = 0;
+    public static boolean tests = false;
 
     Twitter() {
         this.users = new ArrayList<>();
@@ -181,10 +182,13 @@ public class Twitter {
     }
 
     public void printFollowerMessages(ArrayList<Message> msgsAndPosts, User fromUser, long currentTime) {
-        FilesManager fm = FilesManager.getInstance();
-        fm.appendToOutputFile(fromUser.getUsername() + ":");
 
+        if (tests) {
+            FilesManager fm = FilesManager.getInstance();
+            fm.appendToOutputFile(fromUser.getUsername() + ":");
+        }
         System.out.println(fromUser.getUsername() + ":");
+
         Collections.sort(msgsAndPosts, new Comparator<Message>() {
             @Override
             public int compare(Message o1, Message o2) {
